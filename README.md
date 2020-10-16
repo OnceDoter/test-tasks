@@ -1,1 +1,1 @@
-# test-tasks, when I tried to become Junior .Net developer
+# Tasks, when I tried to become Junior .Net developer
