@@ -9,7 +9,6 @@ namespace elcomplus
 {
     public sealed partial class Form : MaterialForm
     {
-        private const string temp = "foo.xml";
         public Form()
         {
             InitializeComponent();
@@ -41,14 +40,6 @@ namespace elcomplus
             }
         }
         private void download_Click(object sender, EventArgs e)
-        {
-            if (textBox.Text == string.Empty)
-                MaterialMessageBox.Show("Небходимо указать ссылку!");
-
-            else if (!Uri.IsWellFormedUriString(textBox.Text, UriKind.RelativeOrAbsolute))
-                MaterialMessageBox.Show("неправильная ссылка!");
-
-            else treeView.TreeFromXmlUrl(textBox.Text);
-        }
+            => treeView.TreeFromXmlUrl(textBox.Text);
     }
 }
