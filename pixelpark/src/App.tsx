@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Container, Typography} from "@material-ui/core";
+import Navbar from "./components/Navbar";
+import Login from "./components/Login";
+import Table from "./components/Table";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [loginFormVisible, setLoginFormVisible] = useState(true);
+    let onLogin = () => setLoginFormVisible(false);
+
+    if (loginFormVisible) return (
+        <div className="App">
+            <Navbar/>
+            <Login onSubmit={onLogin}/>
+        </div>
+    ); else return (
+        <div className="App">
+            <Navbar/>
+            <Table token={'ds'}/>
+        </div>
+    );
 }
 
 export default App;
