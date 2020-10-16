@@ -89,7 +89,7 @@ namespace elcomplus.Infrastructure
             }
             catch (XmlException e)
             {
-                MaterialMessageBox.Show(e.Message);
+                MaterialMessageBox.Show($"Xml не удовлетворяет требованиям {nameof(XmlDocument)}.{nameof(XmlDocument.Validate)}()\n{e.Message}");
             }
         }
     }
