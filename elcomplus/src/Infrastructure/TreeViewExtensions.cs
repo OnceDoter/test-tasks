@@ -21,14 +21,44 @@ namespace elcomplus.Infrastructure
             {
                 MaterialMessageBox.Show($"У вас недостаточно прав\n{e.Message}");
             }
+            catch (NotSupportedException e)
+            {
+                MaterialMessageBox.Show($"Непредвиденная ошибка\n{e.Message}");
+            }
         }
 
         public static void TreeFromXmlUrl(this TreeView tree, string url)
         {
-
-            using var client = new WebClient();
-            tree.TreeFromXml(client.DownloadString(url));
-            
+            var client = new WebClient();
+            try
+            {
+                
+                if (url == string.Empty)
+                {
+                    MaterialMessageBox.Show("Небходимо указать ссылку!");
+                }
+                else if (!Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
+                {
+                    MaterialMessageBox.Show("неправильная ссылка!");
+                }
+                tree.TreeFromXml(client.DownloadString(url));
+            }
+            catch (TimeoutException e)
+            {
+                MaterialMessageBox.Show($"Сервер не отвечает\n{e.Message}");
+            }
+            catch (UnauthorizedAccessException e)
+            {
+                MaterialMessageBox.Show($"У вас недостаточно прав\n{e.Message}");
+            }
+            catch (NotSupportedException e)
+            {
+                MaterialMessageBox.Show($"Непредвиденная ошибка\n{e.Message}");
+            }
+            finally
+            {
+                client.Dispose();
+            }
         }
 
         private static void Add(XmlNode inXmlNode, TreeNode inTreeNode)
